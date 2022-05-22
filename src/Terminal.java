@@ -25,7 +25,7 @@ public class Terminal
         {
             System.out.println("CREATING FOLDER...");
             List<String> args = CommandParser.getArgs();
-            DiskManipulator.allocator.createFolder(args.get(0),4);
+            DiskManipulator.allocator.createFolder(args.get(0));
         }
         else if (Objects.equals(command, "DeleteFile"))
         {

@@ -6,6 +6,7 @@ public class FreeSpaceManager
 
 
 
+
     public static int getNFreeBlocksAt(int length)
     {
         return getNFreeBlocksAt(2,length);

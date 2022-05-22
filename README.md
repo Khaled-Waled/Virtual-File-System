@@ -4,7 +4,7 @@ This is a mock implementation of a virtual file system. A user is able to intera
 # Actual storage format:
 <pre>
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
--    512                        -   |   Number of blocks            |       Metadata section
+-    512   x                    -   |   Number of blocks / x is allocation|       Metadata section
 -    00000100011100000          -   |   Block state (full / empty)  |     < ======
 -                               -
 -                               -
