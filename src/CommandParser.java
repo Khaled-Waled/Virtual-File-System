@@ -48,7 +48,7 @@ public class CommandParser
     {
         return function;
     }
-    public List<String> getArgs()
+    public static List<String> getArgs()
     {
         return arguments;
     }

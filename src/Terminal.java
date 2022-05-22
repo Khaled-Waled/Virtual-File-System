@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -22,8 +23,9 @@ public class Terminal
         }
         else if (Objects.equals(command, "CreateFolder"))
         {
-            //TODO
             System.out.println("CREATING FOLDER...");
+            List<String> args = CommandParser.getArgs();
+            DiskManipulator.allocator.createFolder(args.get(0),4);
         }
         else if (Objects.equals(command, "DeleteFile"))
         {
@@ -37,8 +39,7 @@ public class Terminal
         }
         else if (Objects.equals(command, "DisplayDiskStatus"))
         {
-            //TODO
-            System.out.println("DISK STATUS:        NO INITIALIZED");
+            FreeSpaceManager.displayDiskStructure();
         }
         else if (Objects.equals(command, "DisplayDiskStructure"))
         {

@@ -1,6 +1,5 @@
 import java.io.*;
-import java.nio.file.Files;
-import java.util.Objects;
+import java.util.Scanner;
 
 import static java.lang.System.exit;
 
@@ -9,12 +8,15 @@ public class DiskManipulator
     private static File disk;
     private static int numOfBlocks;
     private static int pointerPos;
+    public static Allocator allocator;
 
-    public DiskManipulator(String newPath, int numOfBlocks)
+    public DiskManipulator(String newPath)
     {
         try
         {
             disk = new File(newPath);
+            //if it already exists:
+            //read data from file
             if(!disk.createNewFile())
             {
                 String line = getLine(0);
@@ -32,6 +34,42 @@ public class DiskManipulator
             }
             else
             {
+                //Disk parameters
+                System.out.println("******Please enter disk details******");
+                Scanner scanner = new Scanner(System.in);
+
+                System.out.println("Please enter number of blocks:- ");
+                numOfBlocks = scanner.nextInt();
+
+                System.out.println("Enter disk Path:-");
+                newPath = scanner.next();
+                //scanner.nextLine();
+
+                System.out.println("Creating file at: "+ newPath);
+                //Choice of allocation technique
+                System.out.println("Enter allocation technique:-");
+                System.out.println("1- Contiguous Allocation");
+                System.out.println("2- Indexed Allocation");
+                System.out.println("3- Linked Allocation");
+                int option = scanner.nextInt();
+                if(option == 1)
+                {
+                    allocator = new ContiguousAllocator();
+                }
+                else if (option == 2)
+                {
+                    allocator = new IndexedAllocator();
+                }
+                else if (option == 3)
+                {
+                    allocator = new LinkedAllocator();
+                }
+                else
+                {
+                    exit(3);
+                }
+
+                //Execute formatting with new parameters
                 formatDisk(newPath, numOfBlocks);
             }
         }
@@ -42,6 +80,14 @@ public class DiskManipulator
 
     }
 
+
+    public static int addEntry(String path, String entry)
+    {
+
+
+
+        return 0;
+    }
 
     public static void editLine(int index, String newLine)
     {
@@ -160,20 +206,15 @@ public class DiskManipulator
         }
 
         //write metadata section
-        System.out.println("numOfBlocks = "+numOfBlocks );
         editLine(0,String.valueOf(numOfBlocks));
         System.out.println("Blocks state = "+FreeSpaceManager.getBlocksState() );
         editLine(1,FreeSpaceManager.getBlocksState());
 
 
-
-
-        //Write zeros in the data section
-        //TODO
-
         //write root directory
-        //TODO
+        allocator.createFolder("root", 2);
     }
+
 
 
     public static int getNumOfBlocks()

@@ -31,16 +31,22 @@ public class FreeSpaceManager
             }
             low = high+1;
         }
-        /*
-        int i=start;
-        for(; i<DiskManipulator.getNumOfBlocks()-length; i++)
-        {
-            String temp = bin.substring(start+i, start+i+length);
-            BigInteger BDecimal = new BigInteger(temp,2);
-            if(BDecimal != new BigInteger(String.valueOf(0),10))
-                continue;
-        }*/
         return -1;
+    }
+
+    public static void displayDiskStructure()
+    {
+        String bin = hexToBinary(blocksState);
+        int emptySpace=0;
+        for(int i=0; i<bin.length(); i++)
+        {
+            if(bin.charAt(i) == '0')
+                emptySpace++;
+        }
+        System.out.println("Empty space: "+emptySpace + " KB");
+        System.out.println("Allocated Space: "+ (DiskManipulator.getNumOfBlocks()-emptySpace) + " KB");
+        System.out.println("Empty blocks: "+ emptySpace);
+        System.out.println("Allocated blocks: "+ (DiskManipulator.getNumOfBlocks()-emptySpace));
     }
 
 
@@ -97,5 +103,8 @@ public class FreeSpaceManager
     {
         blocksState =str;
     }
+
+
+
 
 }
