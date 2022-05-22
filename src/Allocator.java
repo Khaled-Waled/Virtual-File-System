@@ -47,6 +47,7 @@ public abstract class Allocator
 
 
             }
+            
             else
             {
                 int len = Integer.parseInt(DiskManipulator.getLine(pointer).split(" ")[1]);
