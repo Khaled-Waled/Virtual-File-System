@@ -113,7 +113,7 @@ public class IndexedAllocator extends Allocator {
                 String[] Line = DiskManipulator.getLine(pointer + i).split(" ");
                 DiskManipulator.editLine(pointer + i, ".");
 
-                int start = Integer.parseInt(newLine[Line.length - 1]);
+                int start = Integer.parseInt(Line[Line.length - 1]);
                 String indexarray = DiskManipulator.getLine(start);
                 DiskManipulator.editLine(start, ".");
                 emptyBLocks(indexarray);
