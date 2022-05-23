@@ -186,7 +186,10 @@ public class DiskManipulator
                 e.printStackTrace();
             }
         }
-        return null;
+        if(index>numOfBlocks)
+            return null;
+        else
+            return "";
     }
     //call this function to initialize the disk for the first time
     public static void formatDisk(String newPath, int numOfBlocks, int allocTechnique)
