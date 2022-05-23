@@ -41,8 +41,6 @@ public abstract class Allocator
                 {
                     DiskManipulator.editLine(i,".");
                 }
-
-
             }
             
             else
@@ -75,7 +73,6 @@ public abstract class Allocator
     public abstract boolean deleteFile(String path);
     public boolean deleteFolder(String path)
     {
-        int MAX_ENTRIES = DiskManipulator.MAX_Entries;
         String[] arr = path.split("/");
         int arrLen = arr.length;
         int iter = 1;
@@ -119,8 +116,8 @@ public abstract class Allocator
                                 String newPath = path+'/'+sub_line[1];
                                 System.out.println("recursively Deleting folder At: "+ newPath);
                                 //Recursive call to delete inner folders
-                                if(!deleteFolder(newPath)) System.out.println("cant recursively delete "+ newPath);
-                                    //return false;
+                                if(!deleteFolder(newPath))
+                                    return false;
                             }
                             else if(sub_line[0].equalsIgnoreCase("1"))
                             {
@@ -175,7 +172,6 @@ public abstract class Allocator
                 }
             }
         }
-
         return false;
     }
 }

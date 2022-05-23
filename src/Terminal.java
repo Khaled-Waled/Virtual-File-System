@@ -30,7 +30,6 @@ public class Terminal
         }
         else if (Objects.equals(command, "DeleteFile"))
         {
-            //TODO
             System.out.println("DELETING FILE...");
             List<String> args = CommandParser.getArgs();
             DiskManipulator.allocator.deleteFile(args.get(0));
@@ -48,12 +47,10 @@ public class Terminal
         }
         else if (Objects.equals(command, "DisplayDiskStructure"))
         {
-            //TODO
-            System.out.println("DISK STRUCTURE:     EMPTY :O");
+            FreeSpaceManager.displayDiskStructure();
         }
         else if (command.equalsIgnoreCase("exit"))
         {
-            //TODO
             System.exit(0);
         }
         else
