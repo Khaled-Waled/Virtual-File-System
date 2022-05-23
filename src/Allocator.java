@@ -1,29 +1,20 @@
-import java.util.zip.Inflater;
-
 public abstract class Allocator
 {
     public abstract boolean createFile(String path, int size);
     public boolean createFolder(String path)
     {
-        /*
-        String line = dirName+" 0";
-        DiskManipulator.editLine(block,line);
-         */
-        boolean state = true;
+        int MAX_ENTRIES = DiskManipulator.MAX_Entries;
         String[] arr = path.split("/");
         int arrLen = arr.length;
         int iter = 1;
-        String curr = arr[iter], parent = arr[iter-1];
+        String curr = arr[iter];
         int STARTPOS = 2;
         int pointer = STARTPOS;
 
-        boolean inProg = true;
         while(iter < arrLen)
         {
             if(iter == arrLen-1)
             {
-                System.out.println("pointer = "+pointer);
-                System.out.println(DiskManipulator.getLine(pointer));
                 String[] head = DiskManipulator.getLine(pointer).split(" ");
                 int len = Integer.parseInt(head[1]);
                 for (int i = 1; i <= len; i++)
@@ -39,11 +30,15 @@ public abstract class Allocator
                 //create folder entry
                 String newLine = head[0]+" "+String.valueOf(len+1);
                 DiskManipulator.editLine(pointer, newLine);
-                int block = FreeSpaceManager.getNFreeBlocksAt(13, 10)+1;
+                int block = FreeSpaceManager.getNFreeBlocksAt(pointer+len, MAX_ENTRIES);
                 String entry = "0 "+curr+" "+block;
                 DiskManipulator.editLine(pointer+len+1, entry);
                 newLine = curr+" 0";
                 DiskManipulator.editLine(block, newLine);
+                for(int i=block+1; i< Math.min(DiskManipulator.getNumOfBlocks(), block+MAX_ENTRIES); i++)
+                {
+                    DiskManipulator.editLine(i,".");
+                }
 
 
             }
@@ -60,7 +55,6 @@ public abstract class Allocator
                         pointer = Integer.parseInt(line[2]);
                         iter++;
                         curr = arr[iter];
-                        parent  = arr[iter-1];
                         correctPath = true;
                         break;
                     }
@@ -70,7 +64,6 @@ public abstract class Allocator
                 {
                     return false;
                 }
-
             }
         }
 

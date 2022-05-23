@@ -10,9 +10,11 @@ public class DiskManipulator
     private static int numOfBlocks;
     private static int pointerPos;
     public static Allocator allocator;
+    public static int MAX_Entries;
 
     public DiskManipulator()
     {
+        MAX_Entries = getRandomNumber(10,20);
         String newPath = "./structure.vfs";
         try
         {
@@ -28,7 +30,6 @@ public class DiskManipulator
                     numOfBlocks = Integer.parseInt(arr[0]);
                     initAllocator(Integer.parseInt(arr[1]));
                 }
-                System.out.println(numOfBlocks);
 
                 line = getLine(1);
                 if(line != null)
@@ -211,15 +212,22 @@ public class DiskManipulator
         String line = numOfBlocks+" "+allocTechnique;
         initAllocator(allocTechnique);
         editLine(0,line);
-        System.out.println("Blocks state = "+FreeSpaceManager.getBlocksState() );
         editLine(1,FreeSpaceManager.getBlocksState());
 
 
         //write root directory
         String rootLine = "root 0";
         editLine(2, rootLine);
+
+        for(int i=2+1; i< Math.min(DiskManipulator.getNumOfBlocks(), 2+ MAX_Entries); i++)
+        {
+            DiskManipulator.editLine(i,".");
+        }
     }
 
+    public int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
+    }
 
 
     public static int getNumOfBlocks()

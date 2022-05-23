@@ -17,7 +17,6 @@ public class FreeSpaceManager
 
 
         String bin = hexToBinary(blocksState);
-        System.out.println(bin);
         int low = start, high, len =0;
         while(low<bin.length())
         {
