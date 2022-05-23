@@ -34,8 +34,10 @@ public class Terminal
         }
         else if (Objects.equals(command, "DeleteFolder"))
         {
-            //TODO
             System.out.println("DELETING FOLDER...");
+            List<String> args = CommandParser.getArgs();
+            if(!DiskManipulator.allocator.deleteFolder(args.get(0)))
+                System.out.println("Cannot delete folder at "+args.get(0));;
         }
         else if (Objects.equals(command, "DisplayDiskStatus"))
         {
