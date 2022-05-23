@@ -18,8 +18,9 @@ public class Terminal
         String command = CommandParser.getCommandName();
         if(Objects.equals(command, "CreateFile"))
         {
-            //TODO
             System.out.println("CREATING FILE...");
+            List<String> args = CommandParser.getArgs();
+            DiskManipulator.allocator.createFile(args.get(0), Integer.parseInt(args.get(1)));
         }
         else if (Objects.equals(command, "CreateFolder"))
         {
@@ -31,6 +32,8 @@ public class Terminal
         {
             //TODO
             System.out.println("DELETING FILE...");
+            List<String> args = CommandParser.getArgs();
+            DiskManipulator.allocator.deleteFile(args.get(0));
         }
         else if (Objects.equals(command, "DeleteFolder"))
         {

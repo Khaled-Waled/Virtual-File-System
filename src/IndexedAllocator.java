@@ -7,7 +7,7 @@ public class IndexedAllocator extends Allocator {
         ArrayList<String> pointers = new ArrayList<>();
         int bounds = DiskManipulator.getNumOfBlocks();
         for (int Data = 0; Data < size && Disk < bounds; Disk++) {
-            if (DiskManipulator.getLine(Disk) == null) {
+            if ("".equals(DiskManipulator.getLine(Disk))) {
                 DiskManipulator.editLine(Disk, name);
                 pointers.add(String.valueOf(Disk));
                 Data++;
@@ -107,9 +107,13 @@ public class IndexedAllocator extends Allocator {
                     return false;
 
                 //Delete file entry
-                String[] newLine = DiskManipulator.getLine(pointer + i).split(" ");
+                String newLine = head[0] + " " + String.valueOf(len - 1);
+                DiskManipulator.editLine(pointer, newLine);
+
+                String[] Line = DiskManipulator.getLine(pointer + i).split(" ");
                 DiskManipulator.editLine(pointer + i, ".");
-                int start = Integer.parseInt(newLine[newLine.length - 1]);
+
+                int start = Integer.parseInt(newLine[Line.length - 1]);
                 String indexarray = DiskManipulator.getLine(start);
                 DiskManipulator.editLine(start, ".");
                 emptyBLocks(indexarray);
