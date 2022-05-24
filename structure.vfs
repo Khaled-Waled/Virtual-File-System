@@ -1,6 +1,7 @@
-200 1
-fffc0000000000000000000000000000000000000000000000
-root 0
+200 3
+fffffffffc0000000000000000000000000000000000000000
+root 1
+1 a.c 20
 .
 .
 .
@@ -12,75 +13,26 @@ root 0
 .
 .
 .
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.
+.
+.
+.
+.
+a.c 26
+DATA OF: a.c
+DATA OF: a.c
+DATA OF: a.c
+DATA OF: a.c
+DATA OF: a.c
+a.c 32
+DATA OF: a.c
+DATA OF: a.c
+DATA OF: a.c
+DATA OF: a.c
+DATA OF: a.c
+a.c -1
+DATA OF: a.c
+DATA OF: a.c
+DATA OF: a.c
+DATA OF: a.c
+DATA OF: a.c

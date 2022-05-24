@@ -34,7 +34,7 @@ public class FreeSpaceManager
         return -1;
     }
 
-    public static void displayDiskStructure()
+    public static void displayDiskStatus()
     {
         String bin = hexToBinary(blocksState);
         int emptySpace=0;
@@ -105,6 +105,8 @@ public class FreeSpaceManager
     }
 
 
+    public static void displayDiskStructure()
+    {
 
-
+    }
 }

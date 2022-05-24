@@ -98,15 +98,21 @@ public class LinkedAllocator extends Allocator
                 int len = Integer.parseInt(head[1]);
                 boolean found = false;
                 int blockInd = 0;
-                int i;
-                for (i = 1; i <= len; i++) {
+                int i,s=0;
+                for (i = 1; s<len; i++)
+                {
                     String[] line = DiskManipulator.getLine(pointer + i).split(" ");
+                    if(line[0].equals("."))
+                    {
+                        continue;
+                    }
                     if (line[0].equalsIgnoreCase("1") && line[1].equalsIgnoreCase(curr)) {
                         //found
                         blockInd = Integer.parseInt(line[2]);
                         found = true;
                         break;
                     }
+                    s++;
                 }
                 if (!found)
                     return false;

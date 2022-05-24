@@ -43,7 +43,7 @@ public class Terminal
         }
         else if (Objects.equals(command, "DisplayDiskStatus"))
         {
-            FreeSpaceManager.displayDiskStructure();
+            FreeSpaceManager.displayDiskStatus();
         }
         else if (Objects.equals(command, "DisplayDiskStructure"))
         {
