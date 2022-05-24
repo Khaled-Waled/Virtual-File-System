@@ -14,7 +14,7 @@ public class DiskManipulator
 
     public DiskManipulator()
     {
-        MAX_Entries = getRandomNumber(10,20);
+        MAX_Entries = 15;
         String newPath = "./structure.vfs";
         try
         {

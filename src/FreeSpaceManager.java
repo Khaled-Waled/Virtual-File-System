@@ -1,4 +1,7 @@
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class FreeSpaceManager
 {
@@ -107,6 +110,32 @@ public class FreeSpaceManager
 
     public static void displayDiskStructure()
     {
-
+        traverseDFS(2,0);
     }
+
+    public static void printFile(String fileName, int spaceNum){
+        for(int i=0; i<spaceNum; i++)
+            System.out.print("\t");
+        System.out.println(fileName);
+    }
+    public static void traverseDFS(int top, int spaceNum){
+
+        String[] currLine = DiskManipulator.getLine(top).split(" ");
+        for(int i=0; i<spaceNum; i++)
+            System.out.print("\t");
+        System.out.println("<" + currLine[0] + ">");
+
+        for(int p = top+1; p <= top + DiskManipulator.MAX_Entries ; p++) {
+            String[] line = DiskManipulator.getLine(p).split(" ");
+
+            if (line[0].equals("0") ) {
+                traverseDFS(Integer.parseInt(line[2]), spaceNum + 1);
+            }
+            else if(line[0].equals("1"))
+                printFile(line[1], spaceNum + 1);
+        }
+    }
+
+
+
 }
