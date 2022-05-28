@@ -85,13 +85,6 @@ public class DiskManipulator
         }
     }
 
-
-    public static int addEntry(String path, String entry)
-    {
-
-        return 0;
-    }
-
     public static void editLine(int index, String newLine)
     {
         File fileToBeModified = new File(disk.getPath());

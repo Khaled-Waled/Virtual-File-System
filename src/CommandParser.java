@@ -9,6 +9,7 @@ public class CommandParser
                     "CreateFile","CreateFolder",
                     "DeleteFile","DeleteFolder",
                     "DisplayDiskStatus","DisplayDiskStructure",
+                    "TellUser", "CUser", "Grant", "Login",
                     "exit"};
     public static boolean parseCommand(String command)
     {
