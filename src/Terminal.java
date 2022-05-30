@@ -70,22 +70,50 @@ public class Terminal
         {
             System.out.println("You are: "+ UserManager.getCurrentUser());
         }
-        else if(command.equalsIgnoreCase("CUser"))
-        {
+        else if(command.equalsIgnoreCase("CUser")) {
+            if (!UserManager.getCurrentUser().equalsIgnoreCase("admin"))
+            {
+                System.out.println("Sorry, you are not authorized to create a user.");
+                return;
+            }
             List<String> args = CommandParser.getArgs();
             if(args.size()< 2)
             {
                 System.out.println("Too few arguments");
                 return;
             }
-            if(!UserManager.login(args.get(0), args.get(1)))
+            if(!UserManager.createUser(args.get(0), args.get(1)))
                 System.out.println("User Creation Failed");
             else
-                System.out.println("Successfully created the user: "+ UserManager.getCurrentUser()+" !");
+                System.out.println("Successfully created the user: "+ args.get(0) +" !");
         }
         else if(command.equalsIgnoreCase("Grant"))
         {
             //TODO
+            List<String> args = CommandParser.getArgs();
+            if(args.size() != 3)
+            {
+                System.out.println("Too few arguments");
+                return;
+            }
+            if (!UserManager.getCurrentUser().equalsIgnoreCase("admin"))
+            {
+                System.out.println("Sorry, you are not authorized to grant permissions.");
+                return;
+            }
+            if(!UserManager.searchForUser(args.get(0), "",true))
+            {
+                System.out.println("User not found");
+                return;
+            }
+
+            //Assuming path already exists
+            boolean granted = CapManager.grantCapability(args.get(0), args.get(1), args.get(2));
+            if(granted)
+                System.out.println("Successfully granted capability");
+            else
+                System.out.println("Couldn't grant capability");
+
         }
         else if(command.equalsIgnoreCase("Login"))
         {

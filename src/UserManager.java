@@ -8,15 +8,13 @@ public class UserManager
 
     UserManager()
     {
-        currentUser = null;
+        currentUser = "admin";
 
         //Create files
         File userList = new File("./user.txt");
-        File capabilitiesList = new File("./capabilities.txt");
         try
         {
             userList.createNewFile();
-            capabilitiesList.createNewFile();
         }
         catch (IOException e)
         {
@@ -34,7 +32,8 @@ public class UserManager
             FileWriter fileWriter = new FileWriter("./user.txt", true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            bufferedWriter.write(userName+" ,"+password);
+            bufferedWriter.write(userName+", "+password );
+            bufferedWriter.write("\n");
             bufferedWriter.close();
             return true;
         }
@@ -50,24 +49,26 @@ public class UserManager
         if(!searchForUser(userName,password,false))
             return false;
 
-
         //if he exists, set current user to him
         setCurrentUser(userName);
         return true;
     }
 
 
-    private static boolean searchForUser(String userName, String password, boolean noPass)
+    public static boolean searchForUser(String userName, String password, boolean noPass)
     {
         BufferedReader reader = null;
         File usersFile = new File("./user.txt");
         try
         {
             reader = new BufferedReader(new FileReader(usersFile));
-            String[] line = reader.readLine().split(" ,");
-            if(line[0].equals(userName))
-                if(noPass || line[1].equals(password))
-                    return true;
+            String line;
+            while((line = reader.readLine()) != null){
+                String[] words = line.split(", ");
+                if(words[0].equals(userName))
+                    if(noPass || words[1].equals(password))
+                        return true;
+            }
         }
         catch (IOException e)
         {

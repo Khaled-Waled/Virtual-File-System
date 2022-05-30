@@ -84,10 +84,13 @@ public class DiskManipulator
             exit(5000);
         }
     }
+    public static void editLine(int index, String newLine){
+        editLine(index, newLine, disk.getPath());
+    }
 
-    public static void editLine(int index, String newLine)
+    public static void editLine(int index, String newLine, String path)
     {
-        File fileToBeModified = new File(disk.getPath());
+        File fileToBeModified = new File(path);
         String content = "";
         BufferedReader reader = null;
         FileWriter writer = null;
